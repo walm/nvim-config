@@ -39,3 +39,9 @@ keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Neogit" })
 -- move selected lines up/down in Visual mode with Ctrl-j/k
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", opts)
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", opts)
+
+-- TODO: map this "code" actions different for each language
+-- lua coding in nvim
+vim.keymap.set("n", "<leader>cX", "<cmd>source %<CR>", { desc = "Source lua file" })
+vim.keymap.set("n", "<leader>cx", ":.lua<CR>", { desc = "Source lua line" })
+vim.keymap.set("v", "<leader>cx", ":lua<CR>", { desc = "Source lua block" })
