@@ -4,7 +4,7 @@ return {
     opts = {
       -- list of servers for mason to install
       ensure_installed = {
-        "ts_ls",
+        "vtsls", -- "ts_ls",
         "html",
         "cssls",
         "tailwindcss",
