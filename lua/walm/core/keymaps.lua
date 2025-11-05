@@ -6,8 +6,10 @@ local opts = { noremap = true, silent = true }
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode with jk" })
 
 keymap.set("n", "<leader><leader>", "<C-^>", { desc = "Switch to last edited file" })
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 keymap.set("n", "<leader><BS>", "<cmd>StripTrailingWhitespace<CR>", { desc = "Remove trailing whitespace" })
+
+-- Clear search highlights
+keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR><Esc>", { noremap = true, silent = true })
 
 -- increment/decrement numbers
 keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" }) -- increment
