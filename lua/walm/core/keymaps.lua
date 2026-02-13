@@ -47,3 +47,5 @@ vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", opts)
 vim.keymap.set("n", "<leader>cX", "<cmd>source %<CR>", { desc = "Source lua file" })
 vim.keymap.set("n", "<leader>cx", ":.lua<CR>", { desc = "Source lua line" })
 vim.keymap.set("v", "<leader>cx", ":lua<CR>", { desc = "Source lua block" })
+
+vim.keymap.set("n", "<leader>fy", "<cmd>CopyGitRelativePath<CR>", { desc = "Copy git-relative path" })
