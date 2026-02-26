@@ -50,3 +50,7 @@ vim.keymap.set("n", "<leader>cx", ":.lua<CR>", { desc = "Source lua line" })
 vim.keymap.set("v", "<leader>cx", ":lua<CR>", { desc = "Source lua block" })
 
 vim.keymap.set("n", "<leader>fy", "<cmd>CopyGitRelativePath<CR>", { desc = "Copy git-relative path" })
+
+-- ai using pi.dev
+vim.keymap.set("n", "<leader>ai", ":PiAsk<CR>", { desc = "Ask pi" })
+vim.keymap.set("v", "<leader>ai", ":PiAskSelection<CR>", { desc = "Ask pi (selection)" })
