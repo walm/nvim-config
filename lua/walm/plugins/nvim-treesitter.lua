@@ -8,6 +8,12 @@ return {
 
     -- configure treesitter
     treesitter.setup({ -- enable syntax highlighting
+      -- These are normally defaulted by nvim-treesitter at runtime, but lua_ls
+      -- sees them as required in the plugin's TSConfig type annotation.
+      modules = {},
+      sync_install = false,
+      ignore_install = {},
+      auto_install = false,
       highlight = {
         enable = true,
       },
