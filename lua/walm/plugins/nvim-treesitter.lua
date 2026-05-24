@@ -1,61 +1,54 @@
+local ensure_installed = {
+  "json",
+  "javascript",
+  "typescript",
+  "tsx",
+  "yaml",
+  "html",
+  "css",
+  -- "prisma",
+  "markdown",
+  "markdown_inline",
+  -- "svelte",
+  -- "graphql",
+  "bash",
+  "lua",
+  "vim",
+  "dockerfile",
+  "gitignore",
+  "query",
+  "vimdoc",
+  "c",
+  "go",
+  "ruby",
+}
+
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = "main",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   config = function()
-    -- import nvim-treesitter plugin
-    local treesitter = require("nvim-treesitter.configs")
+    local treesitter = require("nvim-treesitter")
 
-    -- configure treesitter
-    treesitter.setup({ -- enable syntax highlighting
-      -- These are normally defaulted by nvim-treesitter at runtime, but lua_ls
-      -- sees them as required in the plugin's TSConfig type annotation.
-      modules = {},
-      sync_install = false,
-      ignore_install = {},
-      auto_install = false,
-      highlight = {
-        enable = true,
-      },
-      -- enable indentation
-      indent = { enable = true },
-      -- ensure these language parsers are installed
-      ensure_installed = {
-        "json",
-        "javascript",
-        "typescript",
-        "tsx",
-        "yaml",
-        "html",
-        "css",
-        -- "prisma",
-        "markdown",
-        "markdown_inline",
-        -- "svelte",
-        -- "graphql",
-        "bash",
-        "lua",
-        "vim",
-        "dockerfile",
-        "gitignore",
-        "query",
-        "vimdoc",
-        "c",
-        "go",
-        "ruby",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
-    })
+    treesitter.setup()
+    treesitter.install(ensure_installed)
 
     -- use bash parser for zsh files
     vim.treesitter.language.register("bash", "zsh")
+
+    -- Neovim 0.12 provides the highlighter; nvim-treesitter main provides
+    -- parsers/queries. Start highlighting for buffers that have a parser.
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function(args)
+        local ok = pcall(vim.treesitter.start, args.buf)
+
+        -- Treesitter-based indentation is still experimental, but this keeps
+        -- the behavior from the old nvim-treesitter config for supported files.
+        if ok then
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      end,
+    })
   end,
 }
