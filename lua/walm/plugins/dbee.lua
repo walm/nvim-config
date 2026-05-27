@@ -7,7 +7,7 @@ return {
     end,
     cmd = "Dbee",
     keys = {
-      { "<leader>D", function() require("dbee").toggle() end, desc = "Toggle Dbee (database)" },
+      { "<leader>db", function() require("dbee").toggle() end, desc = "Toggle Dbee (database)" },
     },
     config = function()
       local sources = require("dbee.sources")
