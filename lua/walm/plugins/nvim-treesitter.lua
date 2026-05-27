@@ -12,6 +12,7 @@ local ensure_installed = {
   -- "svelte",
   -- "graphql",
   "bash",
+  "sql", -- needed by cmp-dbee to parse queries
   "lua",
   "vim",
   "dockerfile",

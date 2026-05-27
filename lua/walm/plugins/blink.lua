@@ -2,7 +2,12 @@ return {
   -- https://cmp.saghen.dev/installation
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
-  dependencies = { "rafamadriz/friendly-snippets", "ribru17/blink-cmp-spell" },
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+    "ribru17/blink-cmp-spell",
+    -- compatibility shim so blink can consume nvim-cmp sources (e.g. cmp-dbee)
+    { "saghen/blink.compat", version = "2.*", lazy = true, opts = {} },
+  },
 
   -- use a release tag to download pre-built binaries
   version = "1.*",
@@ -41,7 +46,15 @@ return {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "spell" },
+      -- dbee completions only in `sql` buffers (dbee scratchpads), plus the defaults
+      per_filetype = {
+        sql = { inherit_defaults = true, "dbee" },
+      },
       providers = {
+        dbee = {
+          name = "cmp-dbee", -- nvim-cmp source name registered by cmp-dbee
+          module = "blink.compat.source",
+        },
         spell = {
           name = "Spell",
           module = "blink-cmp-spell",
