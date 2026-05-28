@@ -22,11 +22,24 @@ keymap.set("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" }) -- 
 keymap.set("n", "<leader>wx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
 keymap.set("n", "<leader>wz", "<cmd>ZenMode<CR>", { desc = "Zen mode" })
 
+-- resize splits via the window group (works everywhere; mini.clue shows these)
+keymap.set("n", "<leader>wH", "<cmd>vertical resize -5<CR>", { desc = "Shrink split width" })
+keymap.set("n", "<leader>wL", "<cmd>vertical resize +5<CR>", { desc = "Grow split width" })
+keymap.set("n", "<leader>wJ", "<cmd>resize -5<CR>", { desc = "Shrink split height" })
+keymap.set("n", "<leader>wK", "<cmd>resize +5<CR>", { desc = "Grow split height" })
+
 -- move between splits
 keymap.set("n", "<C-h>", "<C-w>h", opts)
 keymap.set("n", "<C-j>", "<C-w>j", opts)
 keymap.set("n", "<C-k>", "<C-w>k", opts)
 keymap.set("n", "<C-l>", "<C-w>l", opts)
+
+-- resize splits with Ctrl+Shift+hjkl (needs tmux extended-keys; otherwise these
+-- arrive as <C-hjkl> above and just navigate, with <leader>w{H,J,K,L} as fallback)
+keymap.set("n", "<C-S-h>", "<cmd>vertical resize -5<CR>", { desc = "Shrink split width" })
+keymap.set("n", "<C-S-l>", "<cmd>vertical resize +5<CR>", { desc = "Grow split width" })
+keymap.set("n", "<C-S-j>", "<cmd>resize -5<CR>", { desc = "Shrink split height" })
+keymap.set("n", "<C-S-k>", "<cmd>resize +5<CR>", { desc = "Grow split height" })
 
 -- tabs (I don't really use that, but let's keep if I someday start doing that)
 -- keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
