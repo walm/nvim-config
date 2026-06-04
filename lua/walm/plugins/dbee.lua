@@ -60,6 +60,8 @@ return {
           sources.FileSource:new(project_file),    -- project, editable/persisted
         },
         drawer = { mappings = drawer_mappings },
+        -- stay in the editor after running a query instead of jumping to results
+        result = { focus_result = false },
       })
     end,
   },
